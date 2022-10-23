@@ -27,6 +27,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Animation _animation;
   AnimationController _animationOpController;
   Animation _animationOp;
+  AnimationController _animationStController;
+  Animation _animationSt;
 
   @override
   void initState() {
@@ -44,6 +46,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         AnimationController(vsync: this, duration: Duration(seconds: 10));
     _animationOpController.repeat(reverse: true);
     _animationOp = Tween(begin: 0.0, end: 1.0).animate(_animationOpController);
+    _animationStController =
+        AnimationController(vsync: this, duration: Duration(seconds: 5));
+    _animationStController.repeat(reverse: true);
+    _animationSt = Tween(begin: 0.3, end: 1.0).animate(_animationStController);
   }
 
   Widget build(BuildContext context) {
@@ -149,32 +155,30 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             color: presstheme ? Colors.black : Colors.white,
         child: Column(
           children: [
-            Center(
-                child: Text(
-                  _provider.getCurrentChannel().channelName,
-                  style: 
-                  pressanim
-                      ? TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: presstheme ? Colors.white : Colors.black,
-                          fontSize: 25,
-                        )
-                      : TextStyle(
-                          fontWeight: FontWeight.bold,
-                          // color: Colors.white,
-                          fontSize: 25,
-                          // fontFamily: 'EmbossedGermanica',
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = _animation.value * 0.2
-                            // ..color = presstheme ? Colors.white : Colors.black,
-                            ..color = pressed ? Colors.amber : Colors.green
-                        ),
-                  // GoogleFonts.montserrat(
-                  //     fontSize: 30,
-                  //     color: presstheme ? Colors.white : Colors.black),
-                ),
-              ),
+            Text(
+              _provider.getCurrentChannel().channelName,
+              style: 
+              pressanim
+                  ? TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: pressed ? 
+                      Colors.amber : Colors.green,
+                      fontSize: 25,
+                    )
+                  : TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        // ..strokeWidth = _animation.value * 0.2
+                        // ..color = presstheme ? Colors.white : Colors.black,
+                        ..color = pressed ? Colors.amber : Colors.green
+                    ),
+              // GoogleFonts.montserrat(
+              //     fontSize: 30,
+              //     color: presstheme ? Colors.white : Colors.black),
+            ),
             Opacity(
               opacity: pressanim ? 1 : _animationOp.value,
               child: presstheme
