@@ -147,19 +147,49 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             width: double.infinity,
             height: double.infinity,
             color: presstheme ? Colors.black : Colors.white,
-        child: Opacity(
-          opacity: pressanim ? 1 : _animationOp.value,
-          child: presstheme
-              ? Container(
-                  child: pressanim
-                      ? Image.asset('assets/images/tattoo_white.png')
-                      : WhiteDragon(),
-                )
-              : Container(
-                  child: pressanim
-                      ? Image.asset('assets/images/tattoo_black.png')
-                      : BlackDragon(),
+        child: Column(
+          children: [
+            Center(
+                child: Text(
+                  _provider.getCurrentChannel().channelName,
+                  style: 
+                  pressanim
+                      ? TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: presstheme ? Colors.white : Colors.black,
+                          fontSize: 25,
+                        )
+                      : TextStyle(
+                          fontWeight: FontWeight.bold,
+                          // color: Colors.white,
+                          fontSize: 25,
+                          // fontFamily: 'EmbossedGermanica',
+                          foreground: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = _animation.value * 0.2
+                            // ..color = presstheme ? Colors.white : Colors.black,
+                            ..color = pressed ? Colors.amber : Colors.green
+                        ),
+                  // GoogleFonts.montserrat(
+                  //     fontSize: 30,
+                  //     color: presstheme ? Colors.white : Colors.black),
                 ),
+              ),
+            Opacity(
+              opacity: pressanim ? 1 : _animationOp.value,
+              child: presstheme
+                  ? Container(
+                      child: pressanim
+                          ? Image.asset('assets/images/tattoo_white.png')
+                          : WhiteDragon(),
+                    )
+                  : Container(
+                      child: pressanim
+                          ? Image.asset('assets/images/tattoo_black.png')
+                          : BlackDragon(),
+                    ),
+            ),
+          ],
         ),),
       floatingActionButton: GestureDetector(
         child: Container(margin: EdgeInsets.only(bottom: 30),
@@ -168,7 +198,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ? Icons.pause_circle_filled
                   : Icons.play_circle_filled,
               size: 80,
-              color: Colors.white),
+              color: presstheme ? Colors.black : Colors.white),
           decoration:
               BoxDecoration(shape: BoxShape.circle, boxShadow: [
             pressanim
