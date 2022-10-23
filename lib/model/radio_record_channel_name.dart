@@ -1,0 +1,17 @@
+enum RadioRecordChannelName {
+  PHONK,
+  FUKO,
+  NEURO,
+  PIRAT,
+  BREAKS,
+  TRAP,
+  CHILL,
+  TRANCEMISSION,
+  RUSSIANMIX,
+  DEEP,
+  RAPHITS,
+  ROCK,
+  HIPE,
+  CHOCO,
+  NESLUCH
+}
